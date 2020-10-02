@@ -10,7 +10,27 @@ var budgetController = (function() {
 // UI Controller
 var UIController = (function() {
 
-    // some code
+    // Central place were all our strings are stored.
+    var DOMstrings = {
+        inputType: '.add__type',
+        inputDiscription: '.add__description',
+        inputValue: '.add__value',
+        inputBtn: '.add__btn'
+    }
+
+    return {
+        getInput: function() {
+            return {
+                type: document.querySelector(DOMstrings.inputType).value, // will be iether inc or exp (any one)
+                description: document.querySelector(DOMstrings.inputDiscription).value,
+                value: document.querySelector(DOMstrings.inputValue).value
+            };
+        },
+
+        getDOMstrings: function() {
+            return DOMstrings; // returning strings to be accessed in the controller
+        }
+    };
 
 })();
 
@@ -19,8 +39,12 @@ var UIController = (function() {
 // Global App Controller
 var controller = (function(budgetCtrl, UICtrl) {
 
+    var DOM = UICtrl.getDOMstrings();
+
     var ctrlAddItem = function() {
         // 1. Get the field input data
+        var input = UICtrl.getInput();
+        console.log(input);
 
         // 2. Add the item to the budget controller
         
@@ -31,7 +55,7 @@ var controller = (function(budgetCtrl, UICtrl) {
         // 5. Display the budget on the UI         
     }
 
-    document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+    document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);// Here it is DOM instead of DOMstrings
 
     document.addEventListener('keypress', function(event) {
         
