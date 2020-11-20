@@ -17,8 +17,7 @@ var budgetController = (function() {
 
         } else {
             this.percentage = -1;
-        }
-        
+        }        
 
     };
 
